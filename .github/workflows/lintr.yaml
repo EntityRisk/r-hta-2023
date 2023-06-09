@@ -1,0 +1,20 @@
+name: Lintr
+
+on:
+  push:
+    branches: main
+  pull_request:
+    branches: main
+    types:
+      - opened
+      - reopened
+      - synchronize
+      - ready_for_review
+
+jobs:
+
+  lintr:
+    if: ${{ !github.event.pull_request.draft }}
+    uses: EntityRisk/infrastructure/.github/workflows/project-lintr.yml@main
+    secrets:
+      ACCESS_TOKEN: ${{ secrets.ACCESS_TOKEN }}
