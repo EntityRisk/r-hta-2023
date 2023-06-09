@@ -13,5 +13,4 @@ jobs:
     uses: EntityRisk/infrastructure/.github/workflows/project-pylint.yml@main
     with:
       python-version: '3.10'
-    secrets:
-      ACCESS_TOKEN: ${{ secrets.ACCESS_TOKEN }}
+    secrets: inherit
