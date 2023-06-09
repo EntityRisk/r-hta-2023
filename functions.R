@@ -4,7 +4,7 @@
 #'
 #' @return A n_states by n_states matrix where n_states is the number of health
 #' states.
-trans_probs_matrix <- function() {
+trans_prob_matrix <- function() {
   matrix(
     c(
       0.8, 0.1, 0.1,
@@ -19,10 +19,10 @@ trans_probs_matrix <- function() {
 
 #' Simulate disease progression with a Markov model.
 #'
-#' @param trans_probs A marix containing probabilities of transitions between
+#' @param trans_probs A matrix containing probabilities of transitions between
 #' health states.
 #' @param n_cycles The number of cycles to simulate the model for. Default is
-#' 10.
+#' 5.
 #'
 #' @return A n_cycles + 1 by n_states matrix storing state occupancy
 #' probabilities by model cycle.
@@ -38,7 +38,7 @@ sim_markov <- function(trans_probs, n_cycles = 5) {
 
 #' Compute discounted quality-adjusted life-years (QALYs).
 #'
-#' @param state_probs A n_cycles + 1 by n_states matrix containing state
+#' @param state_probs An n_cycles + 1 by n_states matrix containing state
 #' occupancy probabilities.
 #' @param qol A length n_states vector containing quality-of-life (QoL) weights
 #' for each health state.

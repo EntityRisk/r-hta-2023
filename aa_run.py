@@ -3,7 +3,7 @@
 import functions as hta
 
 # Deterministic analysis
-trans_probs = hta.trans_probs_matrix()
+trans_probs = hta.trans_prob_matrix()
 state_probs = hta.sim_markov(trans_probs, n_cycles=5)
 discounted_qalys = hta.compute_qalys(state_probs, qol=[0.8, 0.6, 0])
 

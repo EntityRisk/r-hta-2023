@@ -5,7 +5,7 @@ import numpy as np
 import xarray as xr
 
 
-def trans_probs_matrix():
+def trans_prob_matrix():
     """Create an example 3x3 transition probability matrix.
 
     Returns
@@ -25,13 +25,13 @@ def sim_markov(trans_probs, n_cycles=5):
     trans_probs : numpy.ndarray
         A 2D numpy array containing probabilities of transition between health
         states.
-    n_cycles : int, default=10
-        The number of cycles to simulate the model for. Default is 10.
+    n_cycles : int, default=5
+        The number of cycles to simulate the model for. Default is 5.
 
     Returns
     -------
     numpy.ndarray
-        A n_cycles + 1 by n_states array storing state occupancy probabilities
+        An n_cycles + 1 by n_states array storing state occupancy probabilities
         by model cycle.
     """
     state_probs = np.empty((n_cycles + 1, 3))  # The Markov trace
@@ -47,7 +47,7 @@ def compute_qalys(state_probs, qol, discount_rate=0.03):
     Parameters
     ----------
     state_probs : numpy.ndarray
-        A n_cycles + 1 by n_states array containing state occupancy
+        An n_cycles + 1 by n_states array containing state occupancy
         probabilities.
     qol : list or numpy.ndarray
         A 1D array_like of length n_states containing quality-of-life (QoL)
@@ -104,8 +104,8 @@ def sim_markov_psa(trans_probs, n_cycles=5):
     trans_probs : numpy.ndarray
         An n_sims by n_states by n_states 3D array where each slice is a
         transition probability matrix for a given draw from the PSA.
-    n_cycles : int, default=10
-        The number of cycles to simulate the model for. Default is 10.
+    n_cycles : int, default=5
+        The number of cycles to simulate the model for. Default is 5.
 
     Returns
     -------
