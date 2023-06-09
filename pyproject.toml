@@ -1,0 +1,27 @@
+[tool.poetry]
+name = "hta"
+version = "0.1.0"
+description = "Example Python code for build decision models for health technology assessment"
+authors = ["Devin Incerti"]
+readme = "README.md"
+repository = "https://github.com/EntityRisk/r-hta-2023"
+classifiers = [
+    "Programming Language :: Python :: 3",
+    "License :: OSI Approved :: MIT License",
+    "Operating System :: OS Independent",
+]
+
+[tool.poetry.urls]
+    "Bug Tracker" = "https://github.com/EntityRisk/r-hta-2023/issues"
+
+[tool.poetry.dependencies]
+python = "^3.11"
+numpy = "^1.24.3"
+
+[tool.poetry.group.dev.dependencies]
+pylint = "^2.17.4"
+pre-commit = "^3.3.2"
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
