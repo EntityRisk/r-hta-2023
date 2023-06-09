@@ -1,4 +1,4 @@
-"""Example Python code for build decision models for health technology
+"""Example Python code for building decision models for health technology
 assessment."""
 
 import numpy as np
