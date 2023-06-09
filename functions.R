@@ -16,6 +16,7 @@ trans_probs_matrix <- function() {
   )
 }
 
+
 #' Simulate disease progression with a Markov model.
 #'
 #' @param trans_probs A marix containing probabilities of transitions between
@@ -32,4 +33,20 @@ sim_markov <- function(trans_probs, n_cycles = 5) {
     state_probs[t + 1, ] <- state_probs[t, ] %*% trans_probs
   }
   state_probs
+}
+
+
+#' Compute discounted quality-adjusted life-years (QALYs).
+#'
+#' @param state_probs A n_cycles + 1 by n_states matrix containing state
+#' occupancy probabilities.
+#' @param qol A length n_states vector containing quality-of-life (QoL) weights
+#' for each health state.
+#' @param discount_rate Discount rate for QALYs.
+compute_qalys <- function(state_probs, qol, discount_rate = 0.03) {
+  qalys <- state_probs %*% qol
+  n_years <- nrow(state_probs) # Assume each cycle is a year
+  times <- seq(0, n_years - 1, by = 1) # Range is from [state, stop]
+  discounted_qalys <- qalys / (1 + discount_rate)^times
+  discounted_qalys
 }

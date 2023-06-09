@@ -38,3 +38,24 @@ def sim_markov(trans_probs, n_cycles=5):
     for t in range(n_cycles):  # Python indexing starts at 0
         state_probs[t + 1, :] = state_probs[t, :] @ trans_probs
     return state_probs
+
+
+def compute_qalys(state_probs, qol, discount_rate=0.03):
+    """Compute discounted quality-adjusted life-years (QALYs).
+
+    Parameters
+    ----------
+    state_probs : numpy.ndarray
+        A n_cycles + 1 by n_states array containing state occupancy
+        probabilities.
+    qol : list or numpy.ndarray
+        A 1D array_like of length n_states containing quality-of-life (QoL)
+        weights for each health state.
+    discount_rate : float, default=0.03
+        Discount rate for QALYs.
+    """
+    qalys = state_probs @ qol
+    n_years = state_probs.shape[0]  # Assume each cycle is a year
+    times = np.arange(0, n_years, step=1)  # Range is from [state, stop)
+    discounted_qalys = qalys / (1 + discount_rate) ** times
+    return discounted_qalys
