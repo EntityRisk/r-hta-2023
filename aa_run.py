@@ -16,3 +16,9 @@ SAMPLE_SIZE = 100
 trans_data = (trans_probs * SAMPLE_SIZE).astype(int)
 trans_probs_psa = hta.simulate_trans_probs(trans_data, n_sims=3)
 state_probs_psa = hta.sim_markov_psa(trans_probs_psa, n_cycles=5)
+state_probs_psa = hta.label_state_probs(state_probs_psa)
+
+print(trans_data)
+print(trans_probs_psa)
+print(state_probs_psa)
+print(state_probs_psa.mean(dim="sim"))

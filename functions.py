@@ -2,6 +2,7 @@
 assessment."""
 
 import numpy as np
+import xarray as xr
 
 
 def trans_probs_matrix():
@@ -118,3 +119,31 @@ def sim_markov_psa(trans_probs, n_cycles=5):
     for t in range(n_cycles):  # Python indexing starts at 0
         state_probs[:, [t + 1], :] = state_probs[:, [t], :] @ trans_probs
     return state_probs
+
+
+def label_state_probs(state_probs):
+    """Convert state occupancy probabilities stored as a numpy array
+    to a labeled xarray DataArray.
+
+    Parameters
+    ----------
+    state_probs : numpy.ndarray
+        An n_sims by n_cycles + 1 by n_states array storing state occupancy
+        probabilities by model cycle.
+
+    Returns
+    -------
+    xarray.DataArray
+        State occupancy probabilities stored in an array with dimensions
+        "sim", "time", and "state", indexing parameter simulations from the
+        PSA, model time (in years), and the health state, respectively.
+    """
+    return xr.DataArray(
+        state_probs,
+        dims=["sim", "time", "state"],
+        coords={  # We assumed each cycle is a year
+            "sim": range(state_probs.shape[0]),
+            "time": range(state_probs.shape[1]),
+            "state": ["Sick", "Sicker", "Death"],
+        },
+    )
