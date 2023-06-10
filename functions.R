@@ -2,8 +2,8 @@
 
 #' Create an example 3x3 transition probability matrix.
 #'
-#' @return A n_states by n_states matrix where n_states is the number of health
-#' states.
+#' @return An n_states by n_states matrix where n_states is the
+#' number of health states.
 trans_prob_matrix <- function() {
   matrix(
     c(
@@ -19,16 +19,16 @@ trans_prob_matrix <- function() {
 
 #' Simulate disease progression with a Markov model.
 #'
-#' @param trans_probs A matrix containing probabilities of transitions between
-#' health states.
-#' @param n_cycles The number of cycles to simulate the model for. Default is
-#' 5.
+#' @param trans_probs A matrix containing probabilities of transitions
+#' between health states.
+#' @param n_cycles The number of cycles to simulate the model for.
+#' Default is 5.
 #'
 #' @return A n_cycles + 1 by n_states matrix storing state occupancy
 #' probabilities by model cycle.
 sim_markov <- function(trans_probs, n_cycles = 5) {
   state_probs <- matrix(NA, nrow = n_cycles + 1, ncol = 3) # The Markov trace
-  state_probs[1, ] <- c(1, 0, 0) # Everyone starts in the same health state
+  state_probs[1, ] <- c(1, 0, 0) # Everyone starts in the same state
   for (t in 1:n_cycles) { # R indexing starts at 1
     state_probs[t + 1, ] <- state_probs[t, ] %*% trans_probs
   }
@@ -38,10 +38,10 @@ sim_markov <- function(trans_probs, n_cycles = 5) {
 
 #' Compute discounted quality-adjusted life-years (QALYs).
 #'
-#' @param state_probs An n_cycles + 1 by n_states matrix containing state
-#' occupancy probabilities.
-#' @param qol A length n_states vector containing quality-of-life (QoL) weights
-#' for each health state.
+#' @param state_probs An n_cycles + 1 by n_states matrix containing
+#' state occupancy probabilities.
+#' @param qol A length n_states vector containing quality-of-life
+#' (QoL) weights for each health state.
 #' @param discount_rate Discount rate for QALYs.
 compute_qalys <- function(state_probs, qol, discount_rate = 0.03) {
   qalys <- state_probs %*% qol

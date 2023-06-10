@@ -11,8 +11,8 @@ def trans_prob_matrix():
     Returns
     -------
     numpy.ndarray
-        An n_states by n_states array where n_states is the number of
-        health states.
+        An n_states by n_states array where n_states is the
+        number of health states.
     """
     return np.array([[0.8, 0.1, 0.1], [0.0, 0.5, 0.5], [0.0, 0.0, 1.0]])
 
@@ -23,16 +23,17 @@ def sim_markov(trans_probs, n_cycles=5):
     Parameters
     ----------
     trans_probs : numpy.ndarray
-        A 2D numpy array containing probabilities of transition between health
-        states.
+        A 2D numpy array containing probabilities of transition
+        between health states.
     n_cycles : int, default=5
-        The number of cycles to simulate the model for. Default is 5.
+        The number of cycles to simulate the model for.
+        Default is 5.
 
     Returns
     -------
     numpy.ndarray
-        An n_cycles + 1 by n_states array storing state occupancy probabilities
-        by model cycle.
+        An n_cycles + 1 by n_states array storing state
+        occupancy probabilities by model cycle.
     """
     state_probs = np.empty((n_cycles + 1, 3))  # The Markov trace
     state_probs[0, :] = [1, 0, 0]  # Everyone starts in the same state
@@ -50,8 +51,8 @@ def compute_qalys(state_probs, qol, discount_rate=0.03):
         An n_cycles + 1 by n_states array containing state occupancy
         probabilities.
     qol : list or numpy.ndarray
-        A 1D array_like of length n_states containing quality-of-life (QoL)
-        weights for each health state.
+        A 1D array_like of length n_states containing quality-of-life
+        (QoL) weights for each health state.
     discount_rate : float, default=0.03
         Discount rate for QALYs.
     """
@@ -128,8 +129,8 @@ def label_state_probs(state_probs):
     Parameters
     ----------
     state_probs : numpy.ndarray
-        An n_sims by n_cycles + 1 by n_states array storing state occupancy
-        probabilities by model cycle.
+        An n_sims by n_cycles + 1 by n_states array storing state
+        occupancy probabilities by model cycle.
 
     Returns
     -------
