@@ -3,6 +3,10 @@
 This repository contains the code used for the 2023 R for HTA workshop held on
 June 12, 2023.
 
+## Slides
+
+The slides are contained in the [slides.pdf](slides.pdf) file.
+
 ## Dependencies
 
 ### Python
